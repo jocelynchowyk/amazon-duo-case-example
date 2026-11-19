@@ -235,24 +235,24 @@ export const ProductCard: React.FC<ProductCardProps> = ({
           </div>
         </div>
 
-        {/* Add to Cart / Quantity Stepper + 1-Click Button */}
-        <div className="pt-1 flex flex-col items-start gap-1.5">
+        {/* Add to Cart / Quantity Stepper + 1-Click Button (6:4 size ratio) */}
+        <div className="pt-1 flex flex-col items-start gap-2 w-full max-w-[260px]">
           {cartQuantity === 0 ? (
             <button
               type="button"
               onClick={() => onAddToCart(product, activeVariant.name, voucherChecked)}
-              className="w-full sm:w-[168px] px-4 py-1.5 bg-[#FFD814] hover:bg-[#F7CA00] active:bg-[#F0B800] border border-[#FCD200] rounded-full text-[13px] font-medium text-[#0F1111] transition-colors cursor-pointer whitespace-nowrap"
+              className="w-full h-[32px] px-3 bg-[#FFD814] hover:bg-[#F7CA00] active:bg-[#F0B800] border border-[#FCD200] rounded-full text-[12px] font-medium text-[#0F1111] transition-colors cursor-pointer whitespace-nowrap flex items-center justify-center"
             >
               Add to cart
             </button>
           ) : (
-            <div className="inline-flex items-center gap-2">
-              <div className="inline-flex items-center border border-[#D5D9D9] rounded-full bg-[#F0F2F2] overflow-hidden">
+            <div className="inline-flex items-center gap-2 h-[32px]">
+              <div className="inline-flex items-center border border-[#D5D9D9] rounded-full bg-[#F0F2F2] overflow-hidden h-[32px]">
                 <button
                   type="button"
                   onClick={() => onUpdateQty(product.id, activeVariant.name, -1)}
                   aria-label="Decrease quantity"
-                  className="px-2.5 py-1 hover:bg-[#E3E6E6] text-[#0F1111] cursor-pointer"
+                  className="px-2.5 h-full hover:bg-[#E3E6E6] text-[#0F1111] cursor-pointer flex items-center"
                 >
                   <Minus className="w-3.5 h-3.5" />
                 </button>
@@ -263,7 +263,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({
                   type="button"
                   onClick={() => onUpdateQty(product.id, activeVariant.name, 1)}
                   aria-label="Increase quantity"
-                  className="px-2.5 py-1 hover:bg-[#E3E6E6] text-[#0F1111] cursor-pointer"
+                  className="px-2.5 h-full hover:bg-[#E3E6E6] text-[#0F1111] cursor-pointer flex items-center"
                 >
                   <Plus className="w-3.5 h-3.5" />
                 </button>
@@ -278,7 +278,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({
           <button
             type="button"
             onClick={() => onOneClickBuy(product, activeVariant.name, voucherChecked)}
-            className="w-full sm:w-[168px] px-4 py-1.5 bg-[#FFA41C] hover:bg-[#FA8900] active:bg-[#E87A00] border border-[#FF8F00] rounded-full text-[13px] font-medium text-[#0F1111] transition-colors cursor-pointer whitespace-nowrap"
+            className="w-full h-[48px] px-4 bg-[#FFA41C] hover:bg-[#FA8900] active:bg-[#E87A00] border border-[#FF8F00] rounded-full text-[14px] font-semibold text-[#0F1111] transition-colors cursor-pointer whitespace-nowrap flex items-center justify-center"
           >
             Buy now with 1-Click
           </button>

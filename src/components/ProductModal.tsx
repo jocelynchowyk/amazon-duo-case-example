@@ -234,16 +234,16 @@ export const ProductModal: React.FC<ProductModalProps> = ({
                 </select>
               </div>
 
-              {/* Action Buttons */}
-              <div className="space-y-2 pt-1">
+              {/* Action Buttons (6:4 size ratio) */}
+              <div className="space-y-2 pt-1 flex flex-col items-start">
                 <button
                   type="button"
                   onClick={handleAdd}
-                  className="w-full py-2 px-4 bg-[#FFD814] hover:bg-[#F7CA00] border border-[#FCD200] rounded-full text-[13px] font-medium text-[#0F1111] cursor-pointer transition-colors flex items-center justify-center gap-1.5"
+                  className="w-full h-[32px] px-3 bg-[#FFD814] hover:bg-[#F7CA00] border border-[#FCD200] rounded-full text-[12px] font-medium text-[#0F1111] cursor-pointer transition-colors flex items-center justify-center gap-1.5 whitespace-nowrap"
                 >
                   {addedFeedback ? (
                     <>
-                      <Check className="w-4 h-4 text-[#007600]" />
+                      <Check className="w-3.5 h-3.5 text-[#007600]" />
                       <span>Added to Cart</span>
                     </>
                   ) : (
@@ -253,7 +253,7 @@ export const ProductModal: React.FC<ProductModalProps> = ({
                 <button
                   type="button"
                   onClick={() => onBuyNow(product, activeVariant.name, qty)}
-                  className="w-full py-2 px-4 bg-[#FFA41C] hover:bg-[#FA8900] border border-[#FF8F00] rounded-full text-[13px] font-medium text-[#0F1111] cursor-pointer transition-colors whitespace-nowrap"
+                  className="w-full h-[48px] px-4 bg-[#FFA41C] hover:bg-[#FA8900] border border-[#FF8F00] rounded-full text-[14px] font-semibold text-[#0F1111] cursor-pointer transition-colors whitespace-nowrap flex items-center justify-center"
                 >
                   Buy now with 1-Click
                 </button>
