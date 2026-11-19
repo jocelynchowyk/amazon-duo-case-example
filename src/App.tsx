@@ -23,6 +23,7 @@ import { CartDrawer, CartItem } from './components/CartDrawer';
 import { LocationModal } from './components/LocationModal';
 import { Footer } from './components/Footer';
 import { AmazonLogoDark } from './components/AmazonMarks';
+import { OneClickModal, OneClickOrder } from './components/OneClickModal';
 
 type SortOption =
   | 'featured'
@@ -68,6 +69,7 @@ export default function App() {
   const [isLocationOpen, setIsLocationOpen] = useState(false);
   const [isMobileFilterOpen, setIsMobileFilterOpen] = useState(false);
   const [isAllDrawerOpen, setIsAllDrawerOpen] = useState(false);
+  const [oneClickOrder, setOneClickOrder] = useState<OneClickOrder | null>(null);
 
   const hasActiveFilters =
     filters.primeOnly ||
@@ -194,6 +196,29 @@ export default function App() {
         return updated;
       }
       return [...prev, { product, variantName, quantity: qty, voucherApplied }];
+    });
+  };
+
+  const handleOneClickBuy = (
+    product: Product,
+    variantName: string,
+    voucherApplied = false,
+    qty = 1
+  ) => {
+    const unitPriceSGD =
+      voucherApplied && product.voucherDiscountPct
+        ? product.priceSGD * (1 - product.voucherDiscountPct / 100)
+        : product.priceSGD;
+    const orderId = `402-${Math.floor(1000000 + Math.random() * 9000000)}-${Math.floor(
+      1000000 + Math.random() * 9000000
+    )}`;
+    setOneClickOrder({
+      orderId,
+      product,
+      variantName,
+      quantity: qty,
+      unitPriceSGD,
+      voucherApplied,
     });
   };
 
@@ -456,6 +481,9 @@ export default function App() {
                     onAddToCart={(prod, variantName, voucher) =>
                       handleAddToCart(prod, variantName, voucher, 1)
                     }
+                    onOneClickBuy={(prod, variantName, voucher) =>
+                      handleOneClickBuy(prod, variantName, voucher, 1)
+                    }
                     onUpdateQty={handleUpdateQty}
                     onOpenModal={(prod, vIdx) =>
                       setModalProduct({ product: prod, variantIdx: vIdx })
@@ -695,9 +723,8 @@ export default function App() {
         onClose={() => setModalProduct(null)}
         onAddToCart={(prod, vName, qty) => handleAddToCart(prod, vName, false, qty)}
         onBuyNow={(prod, vName, qty) => {
-          handleAddToCart(prod, vName, false, qty);
           setModalProduct(null);
-          setIsCartOpen(true);
+          handleOneClickBuy(prod, vName, false, qty);
         }}
       />
 
@@ -718,6 +745,14 @@ export default function App() {
         currentPostalCode={postalCode}
         onClose={() => setIsLocationOpen(false)}
         onApplyPostalCode={(code) => setPostalCode(code)}
+      />
+
+      {/* 1-Click Order Confirmation Modal */}
+      <OneClickModal
+        order={oneClickOrder}
+        postalCode={postalCode}
+        onClose={() => setOneClickOrder(null)}
+        onCancelOrder={() => setOneClickOrder(null)}
       />
     </div>
   );

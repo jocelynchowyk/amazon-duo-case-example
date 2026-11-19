@@ -9,6 +9,7 @@ interface ProductCardProps {
   selectedVariantIdx: number;
   onSelectVariant: (idx: number) => void;
   onAddToCart: (product: Product, variantName: string, voucherApplied: boolean) => void;
+  onOneClickBuy: (product: Product, variantName: string, voucherApplied: boolean) => void;
   onUpdateQty: (productId: string, variantName: string, delta: number) => void;
   onOpenModal: (product: Product, variantIdx: number) => void;
   layoutMode: 'grid' | 'list';
@@ -20,6 +21,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({
   selectedVariantIdx,
   onSelectVariant,
   onAddToCart,
+  onOneClickBuy,
   onUpdateQty,
   onOpenModal,
   layoutMode,
@@ -233,13 +235,13 @@ export const ProductCard: React.FC<ProductCardProps> = ({
           </div>
         </div>
 
-        {/* Add to Cart / Quantity Stepper */}
-        <div className="pt-1">
+        {/* Add to Cart / Quantity Stepper + 1-Click Button */}
+        <div className="pt-1 flex flex-col items-start gap-1.5">
           {cartQuantity === 0 ? (
             <button
               type="button"
               onClick={() => onAddToCart(product, activeVariant.name, voucherChecked)}
-              className="w-full sm:w-auto px-4 py-1.5 bg-[#FFD814] hover:bg-[#F7CA00] active:bg-[#F0B800] border border-[#FCD200] rounded-full text-[13px] font-medium text-[#0F1111] transition-colors cursor-pointer whitespace-nowrap"
+              className="w-full sm:w-[168px] px-4 py-1.5 bg-[#FFD814] hover:bg-[#F7CA00] active:bg-[#F0B800] border border-[#FCD200] rounded-full text-[13px] font-medium text-[#0F1111] transition-colors cursor-pointer whitespace-nowrap"
             >
               Add to cart
             </button>
@@ -272,6 +274,14 @@ export const ProductCard: React.FC<ProductCardProps> = ({
               </span>
             </div>
           )}
+
+          <button
+            type="button"
+            onClick={() => onOneClickBuy(product, activeVariant.name, voucherChecked)}
+            className="w-full sm:w-[168px] px-4 py-1.5 bg-[#FFA41C] hover:bg-[#FA8900] active:bg-[#E87A00] border border-[#FF8F00] rounded-full text-[13px] font-medium text-[#0F1111] transition-colors cursor-pointer whitespace-nowrap"
+          >
+            Buy now with 1-Click
+          </button>
         </div>
       </div>
     </article>

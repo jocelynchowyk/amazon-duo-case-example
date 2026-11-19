@@ -253,9 +253,9 @@ export const ProductModal: React.FC<ProductModalProps> = ({
                 <button
                   type="button"
                   onClick={() => onBuyNow(product, activeVariant.name, qty)}
-                  className="w-full py-2 px-4 bg-[#FFA41C] hover:bg-[#FA8900] border border-[#FF8F00] rounded-full text-[13px] font-medium text-[#0F1111] cursor-pointer transition-colors"
+                  className="w-full py-2 px-4 bg-[#FFA41C] hover:bg-[#FA8900] border border-[#FF8F00] rounded-full text-[13px] font-medium text-[#0F1111] cursor-pointer transition-colors whitespace-nowrap"
                 >
-                  Buy Now
+                  Buy now with 1-Click
                 </button>
               </div>
 
